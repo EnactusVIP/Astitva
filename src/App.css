@@ -265,17 +265,71 @@ h2 {
   max-width: 680px;
 }
 
+/* ── Polaroid wrapper (holds tilted card + decoration) ── */
+.polaroid-wrap {
+  position: relative;
+  padding: 1rem 1.5rem 2rem 0;
+}
+
 .polaroid {
   border: 3px solid var(--violet);
   background: var(--soft-pink);
-  padding: 1rem;
+  padding: 0.9rem;
+  overflow: hidden;
 }
 
-.polaroid img {
+/* Tilt the About polaroid clockwise to match reference */
+.polaroid.right {
+  transform: rotate(4deg);
+  transform-origin: center;
+}
+
+/* Background-image fill — zoomed 225% to crop past the black letterbox
+   in the source images (1024×575 landscape with portrait photo centered) */
+.polaroid-img {
   width: 100%;
+  aspect-ratio: 4/5;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 225%;
+}
+
+/* ── Rainbow arc decoration (bottom-right of About) ── */
+.about-deco {
+  position: absolute;
+  bottom: -10px;
+  right: 0;
+  width: 160px;
+  height: 160px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.arc {
   display: block;
-  height: auto;
-  object-fit: contain;
+  position: absolute;
+  border-radius: 50%;
+  bottom: 0;
+  right: 0;
+}
+
+.arc-1 {
+  width: 90px;
+  height: 90px;
+  border: 18px solid var(--mint);
+}
+
+.arc-2 {
+  width: 140px;
+  height: 140px;
+  border: 18px solid #c8d070;
+}
+
+.arc-3 {
+  width: 190px;
+  height: 190px;
+  border: 18px solid #dde896;
 }
 
 .outlined {
@@ -336,6 +390,25 @@ h2 {
 
   .contact {
     margin: 0 1rem 1.5rem;
+  }
+
+  /* On mobile the polaroid stacks below — remove tilt so it aligns cleanly */
+  .polaroid.right {
+    transform: none;
+  }
+
+  /* Limit polaroid image height on tablet so it doesn't take over the page */
+  .polaroid-img {
+    aspect-ratio: 16/9;
+    background-size: 170%;
+  }
+
+  .polaroid-wrap {
+    padding: 0;
+  }
+
+  .about-deco {
+    display: none;
   }
 }
 

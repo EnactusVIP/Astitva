@@ -23,8 +23,21 @@ export default function About() {
           understanding whenever you need it.
         </p>
       </div>
-      <div className="polaroid right">
-        <img src="/assets/about-image.png" alt="Pride parade car celebration" />
+
+      <div className="polaroid-wrap">
+        <div className="polaroid right">
+          <div
+            className="polaroid-img"
+            style={{ backgroundImage: 'url(/assets/about-image.png)' }}
+            role="img"
+            aria-label="Pride parade car celebration"
+          />
+        </div>
+        <div className="about-deco" aria-hidden="true">
+          <span className="arc arc-1" />
+          <span className="arc arc-2" />
+          <span className="arc arc-3" />
+        </div>
       </div>
     </section>
   )

@@ -2,7 +2,12 @@ export default function ReadMore() {
   return (
     <section className="section two-col reverse" id="read-more">
       <div className="polaroid left">
-        <img src="/assets/readmore-image.png" alt="Aerial view of rainbow pride march" />
+        <div
+          className="polaroid-img"
+          style={{ backgroundImage: 'url(/assets/readmore-image.png)' }}
+          role="img"
+          aria-label="Aerial view of rainbow pride march"
+        />
       </div>
       <div className="content">
         <h2>Read more</h2>
