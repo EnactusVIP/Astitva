@@ -55,6 +55,32 @@ body {
   font-weight: 600;
 }
 
+/* Hamburger button — hidden on desktop */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.nav-toggle span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: var(--ink);
+  border-radius: 2px;
+  transition: transform 0.22s ease, opacity 0.22s ease;
+}
+
+.nav-toggle.open span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
 .navbar-links {
   display: flex;
   gap: 0.8rem;
@@ -70,6 +96,7 @@ body {
   padding: 0.45rem 1rem;
   border-radius: 999px;
   font-size: 0.95rem;
+  transition: background 0.15s;
 }
 
 .navbar-links a:hover {
@@ -80,13 +107,14 @@ body {
 .page {
   width: min(1100px, 100%);
   margin: 0 auto;
-  background-image: linear-gradient(to right, rgba(128, 128, 128, 0.17) 1px, transparent 1px),
+  background-image:
+    linear-gradient(to right, rgba(128, 128, 128, 0.17) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(128, 128, 128, 0.17) 1px, transparent 1px);
   background-size: 20px 20px;
   background-color: #f7f7f7;
 }
 
-/* ── Section scroll offset for sticky navbar ── */
+/* scroll offset accounts for sticky navbar */
 section[id] {
   scroll-margin-top: 65px;
 }
@@ -118,22 +146,23 @@ section[id] {
   position: relative;
   z-index: 2;
   text-align: center;
+  padding: 2rem 1.5rem;
+  width: 100%;
 }
 
 .hero h1 {
   margin: 0;
   font-family: "Cormorant Garamond", serif;
   color: var(--title);
-  font-size: clamp(3rem, 8vw, 7rem);
+  font-size: clamp(2.4rem, 9vw, 7rem);
   font-weight: 500;
   background: rgba(243, 214, 224, 0.85);
   padding: 0 1rem;
   line-height: 1;
+  word-break: break-word;
 }
 
-.hero h1 span {
-  font-style: normal;
-}
+.hero h1 span { font-style: normal; }
 
 .hero h1 em {
   font-style: italic;
@@ -143,10 +172,11 @@ section[id] {
 .hero p {
   margin: 12px auto 0;
   font-family: "Cormorant Garamond", serif;
-  font-size: clamp(1.6rem, 3vw, 3rem);
+  font-size: clamp(1.3rem, 4vw, 3rem);
   color: #5d6f9e;
   background: rgba(236, 228, 188, 0.88);
   width: fit-content;
+  max-width: 90%;
   padding: 0 0.7rem;
 }
 
@@ -156,6 +186,7 @@ section[id] {
   gap: 0.9rem;
   justify-content: center;
   flex-wrap: wrap;
+  padding: 0 0.5rem;
 }
 
 .hero-buttons a {
@@ -166,25 +197,24 @@ section[id] {
   background: rgba(242, 224, 233, 0.94);
   padding: 0.45rem 1rem;
   border-radius: 999px;
+  transition: background 0.15s;
 }
 
-.hero-buttons a:hover {
-  background: #fff0f6;
-}
+.hero-buttons a:hover { background: #fff0f6; }
 
 /* ── Stripe ── */
 .stripe {
   height: 42px;
   background: linear-gradient(
     90deg,
-    var(--pink) 0 13%,
-    var(--orange) 13% 26%,
-    var(--cream) 26% 39%,
-    var(--mint) 39% 52%,
-    var(--blue) 52% 65%,
-    var(--pink) 65% 79%,
-    var(--orange) 79% 92%,
-    var(--cream) 92% 100%
+    var(--pink)   0    13%,
+    var(--orange) 13%  26%,
+    var(--cream)  26%  39%,
+    var(--mint)   39%  52%,
+    var(--blue)   52%  65%,
+    var(--pink)   65%  79%,
+    var(--orange) 79%  92%,
+    var(--cream)  92% 100%
   );
 }
 
@@ -208,7 +238,7 @@ h2 {
   margin: 0 0 1rem;
   font-family: "Cormorant Garamond", serif;
   color: var(--title);
-  font-size: clamp(3rem, 8vw, 6.3rem);
+  font-size: clamp(2.5rem, 8vw, 6.3rem);
   line-height: 0.95;
   font-weight: 500;
   background: rgba(237, 232, 203, 0.72);
@@ -264,6 +294,7 @@ h2 {
   font-size: 4.4rem;
   line-height: 0.86;
   margin-right: 0.5rem;
+  flex-shrink: 0;
 }
 
 .star.pink   { color: #d45a87; }
@@ -272,7 +303,11 @@ h2 {
 .star.green  { color: #a9bc30; }
 .star.blue   { color: #6f8ec6; }
 
-/* ── Responsive ── */
+/* ════════════════════════════════════════
+   RESPONSIVE BREAKPOINTS
+   ════════════════════════════════════════ */
+
+/* ── Tablet (≤ 900px) ── */
 @media (max-width: 900px) {
   .two-col,
   .reverse {
@@ -280,22 +315,110 @@ h2 {
   }
 
   .hero {
-    min-height: 430px;
+    min-height: 420px;
   }
 
-  .navbar-links a {
-    font-size: 0.88rem;
-    padding: 0.4rem 0.8rem;
+  .section {
+    padding: 2.5rem 1.5rem;
   }
 
   .contact {
-    margin: 0;
+    margin: 0 1rem 1.5rem;
+  }
+}
+
+/* ── Large phone — hamburger kicks in (≤ 640px) ── */
+@media (max-width: 640px) {
+  /* Show hamburger, hide inline links */
+  .nav-toggle {
+    display: flex;
+  }
+
+  .navbar-links {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.25rem 0 0.75rem;
+  }
+
+  .navbar-links.open {
+    display: flex;
+  }
+
+  .navbar-links a {
+    text-align: center;
+    font-size: 0.95rem;
+  }
+
+  /* Increase scroll offset — navbar is taller when open but use closed height */
+  section[id] {
+    scroll-margin-top: 58px;
+  }
+
+  .hero {
+    min-height: 360px;
+  }
+
+  .section {
+    padding: 2rem 1.2rem;
+  }
+
+  .contact {
+    margin: 0 0 1.5rem;
     flex-direction: column;
   }
 
   .stars {
     flex-direction: row;
+    font-size: 3rem;
+    gap: 0.6rem;
     margin-right: 0;
-    gap: 0.5rem;
+  }
+
+  /* Cap polaroid height so image doesn't dominate on phone */
+  .polaroid img {
+    aspect-ratio: 16/9;
+  }
+}
+
+/* ── Small phone (≤ 420px) ── */
+@media (max-width: 420px) {
+  .navbar-inner {
+    padding: 10px 1rem;
+  }
+
+  .navbar-brand {
+    font-size: 1.4rem;
+  }
+
+  .hero {
+    min-height: 300px;
+  }
+
+  .hero-buttons a {
+    font-size: 0.88rem;
+    padding: 0.4rem 0.85rem;
+  }
+
+  .section {
+    padding: 1.75rem 1rem;
+  }
+
+  .content p {
+    font-size: 0.98rem;
+  }
+
+  .contact-wrap p {
+    font-size: 0.98rem;
+  }
+
+  .stars {
+    font-size: 2.4rem;
+    gap: 0.4rem;
+  }
+
+  .stripe {
+    height: 30px;
   }
 }
