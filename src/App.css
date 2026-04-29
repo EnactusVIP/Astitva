@@ -189,18 +189,30 @@ section[id] {
   padding: 0 0.5rem;
 }
 
-.hero-buttons a {
-  text-decoration: none;
-  color: #354a76;
-  font-weight: 500;
+/* Join Community button */
+.join-btn {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #fff;
+  background: var(--violet);
   border: 2px solid var(--violet);
-  background: rgba(242, 224, 233, 0.94);
-  padding: 0.45rem 1rem;
+  padding: 0.7rem 2.2rem;
   border-radius: 999px;
-  transition: background 0.15s;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: background 0.2s, transform 0.15s;
+  box-shadow: 0 4px 16px rgba(138, 82, 227, 0.28);
 }
 
-.hero-buttons a:hover { background: #fff0f6; }
+.join-btn:hover {
+  background: #7040c9;
+  transform: translateY(-2px);
+}
+
+.join-btn:active {
+  transform: translateY(0);
+}
 
 /* ── Stripe ── */
 .stripe {
@@ -262,8 +274,8 @@ h2 {
 .polaroid img {
   width: 100%;
   display: block;
-  aspect-ratio: 4/5;
-  object-fit: cover;
+  height: auto;
+  object-fit: contain;
 }
 
 .outlined {
@@ -376,10 +388,6 @@ h2 {
     margin-right: 0;
   }
 
-  /* Cap polaroid height so image doesn't dominate on phone */
-  .polaroid img {
-    aspect-ratio: 16/9;
-  }
 }
 
 /* ── Small phone (≤ 420px) ── */
@@ -396,9 +404,9 @@ h2 {
     min-height: 300px;
   }
 
-  .hero-buttons a {
-    font-size: 0.88rem;
-    padding: 0.4rem 0.85rem;
+  .join-btn {
+    font-size: 0.92rem;
+    padding: 0.6rem 1.8rem;
   }
 
   .section {
@@ -420,5 +428,131 @@ h2 {
 
   .stripe {
     height: 30px;
+  }
+}
+
+/* ════════════════════════════════════════
+   JOIN COMMUNITY PAGE
+   ════════════════════════════════════════ */
+
+.join-page {
+  min-height: 100vh;
+  background: #f1f1f4;
+  background-image:
+    linear-gradient(to right, rgba(128, 128, 128, 0.17) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(128, 128, 128, 0.17) 1px, transparent 1px);
+  background-size: 20px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.join-card {
+  background: #f7f7f7;
+  border: 3px solid var(--violet);
+  padding: 2.5rem 2.2rem;
+  width: min(480px, 100%);
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: var(--violet);
+  font-family: "Poppins", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 1.6rem;
+  display: block;
+  transition: opacity 0.15s;
+}
+
+.back-btn:hover { opacity: 0.7; }
+
+.join-card h2 {
+  margin-bottom: 0.4rem;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+}
+
+.join-sub {
+  margin: 0 0 1.8rem;
+  color: #666;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.join-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.join-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.join-form input {
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  padding: 0.65rem 0.9rem;
+  border: 2px solid #d0c0d8;
+  border-radius: 6px;
+  outline: none;
+  color: var(--ink);
+  background: #fff;
+  transition: border-color 0.15s;
+}
+
+.join-form input:focus {
+  border-color: var(--violet);
+}
+
+.submit-btn {
+  margin-top: 0.4rem;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background: var(--violet);
+  border: none;
+  padding: 0.75rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.submit-btn:hover { background: #7040c9; }
+
+/* Thank you state */
+.thank-you {
+  text-align: center;
+  padding: 3rem 2rem;
+}
+
+.stars-row {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 2.5rem;
+  margin-bottom: 1.2rem;
+  line-height: 1;
+}
+
+.redirect-note {
+  font-size: 0.85rem;
+  color: #999;
+  margin-top: 0.75rem;
+}
+
+@media (max-width: 420px) {
+  .join-card {
+    padding: 2rem 1.2rem;
   }
 }
