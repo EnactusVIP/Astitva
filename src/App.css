@@ -272,7 +272,6 @@ h2 {
 }
 
 .polaroid {
-  border: 3px solid var(--violet);
   background: var(--soft-pink);
   padding: 0.9rem;
   overflow: hidden;
@@ -333,7 +332,6 @@ h2 {
 }
 
 .outlined {
-  border: 3px solid var(--violet);
   padding: 0.7rem;
   background: rgba(255, 255, 255, 0.35);
 }
@@ -341,7 +339,6 @@ h2 {
 /* ── Contact ── */
 .contact {
   margin: 0 1.5rem 2rem;
-  border: 3px solid var(--violet);
   display: flex;
   justify-content: space-between;
   gap: 2rem;
