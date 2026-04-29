@@ -239,7 +239,7 @@ section[id] {
   display: grid;
   grid-template-columns: 1.3fr 1fr;
   gap: 2rem;
-  align-items: start;
+  align-items: center;
 }
 
 .reverse {
@@ -265,21 +265,35 @@ h2 {
   max-width: 680px;
 }
 
-/* ── Polaroid wrapper (holds tilted card + decoration) ── */
+/* ── Polaroid wrapper (holds stacked bg card, tilted polaroid, arcs) ── */
 .polaroid-wrap {
   position: relative;
-  padding: 1rem 1.5rem 2rem 0;
+  padding: 0.5rem 0.5rem 3rem 0;
+}
+
+/* Stacked card peeking behind the main polaroid */
+.polaroid-bg {
+  position: absolute;
+  top: 4%;
+  left: -3%;
+  right: 4%;
+  bottom: 8%;
+  background: rgba(240, 216, 225, 0.7);
+  transform: rotate(-2.5deg);
+  transform-origin: center;
 }
 
 .polaroid {
   background: var(--soft-pink);
   padding: 0.9rem;
   overflow: hidden;
+  position: relative;
+  z-index: 1;
 }
 
-/* Tilt the About polaroid clockwise to match reference */
+/* Tilt the About polaroid clockwise */
 .polaroid.right {
-  transform: rotate(4deg);
+  transform: rotate(6deg);
   transform-origin: center;
 }
 
@@ -293,13 +307,13 @@ h2 {
   background-size: 225%;
 }
 
-/* ── Rainbow arc decoration (bottom-right of About) ── */
+/* ── Olive-green arc decoration (bottom-right of About) ── */
 .about-deco {
   position: absolute;
-  bottom: -10px;
-  right: 0;
-  width: 160px;
-  height: 160px;
+  bottom: -15px;
+  right: -10px;
+  width: 230px;
+  height: 230px;
   overflow: hidden;
   pointer-events: none;
   z-index: 2;
@@ -314,21 +328,21 @@ h2 {
 }
 
 .arc-1 {
-  width: 90px;
-  height: 90px;
-  border: 18px solid var(--mint);
+  width: 100px;
+  height: 100px;
+  border: 20px solid #7d9020;
 }
 
 .arc-2 {
-  width: 140px;
-  height: 140px;
-  border: 18px solid #c8d070;
+  width: 160px;
+  height: 160px;
+  border: 20px solid #8fa62e;
 }
 
 .arc-3 {
-  width: 190px;
-  height: 190px;
-  border: 18px solid #dde896;
+  width: 225px;
+  height: 225px;
+  border: 20px solid #a8bf3c;
 }
 
 .outlined {
@@ -394,7 +408,7 @@ h2 {
     transform: none;
   }
 
-  /* Limit polaroid image height on tablet so it doesn't take over the page */
+  /* Limit polaroid image height on tablet so it doesn't dominate */
   .polaroid-img {
     aspect-ratio: 16/9;
     background-size: 170%;
@@ -404,6 +418,7 @@ h2 {
     padding: 0;
   }
 
+  .polaroid-bg,
   .about-deco {
     display: none;
   }

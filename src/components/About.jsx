@@ -25,6 +25,7 @@ export default function About() {
       </div>
 
       <div className="polaroid-wrap">
+        <div className="polaroid-bg" />
         <div className="polaroid right">
           <div
             className="polaroid-img"
