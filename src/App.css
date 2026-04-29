@@ -128,11 +128,11 @@ section[id] {
   overflow: hidden;
 }
 
-.hero::before {
-  content: "";
+/* Real div replaces ::before so JS can update backgroundPositionY for parallax */
+.hero-bg {
   position: absolute;
   inset: 0;
-  background: url("/assets/hero-bg.png") center/cover no-repeat;
+  background: url("/assets/hero-bg.png") center 50% / cover no-repeat;
   filter: saturate(80%) brightness(78%);
 }
 
@@ -156,10 +156,10 @@ section[id] {
   color: var(--title);
   font-size: clamp(2.4rem, 9vw, 7rem);
   font-weight: 500;
-  background: rgba(243, 214, 224, 0.85);
-  padding: 0 1rem;
   line-height: 1;
   word-break: break-word;
+  animation: fadeUp 0.6s ease both;
+  animation-delay: 0.15s;
 }
 
 .hero h1 span { font-style: normal; }
@@ -174,10 +174,8 @@ section[id] {
   font-family: "Cormorant Garamond", serif;
   font-size: clamp(1.3rem, 4vw, 3rem);
   color: #5d6f9e;
-  background: rgba(236, 228, 188, 0.88);
-  width: fit-content;
-  max-width: 90%;
-  padding: 0 0.7rem;
+  animation: fadeUp 0.6s ease both;
+  animation-delay: 0.35s;
 }
 
 .hero-buttons {
@@ -187,6 +185,8 @@ section[id] {
   justify-content: center;
   flex-wrap: wrap;
   padding: 0 0.5rem;
+  animation: fadeUp 0.6s ease both;
+  animation-delay: 0.55s;
 }
 
 /* Join Community button */
@@ -212,6 +212,59 @@ section[id] {
 
 .join-btn:active {
   transform: translateY(0);
+}
+
+/* ── Staggered fade-in ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Glassmorphism title card ── */
+.hero-glass {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  padding: 2rem 2.5rem;
+  display: inline-block;
+  max-width: 90%;
+}
+
+/* ── Floating bokeh particles ── */
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(7px);
+  opacity: 0.5;
+  animation: bobble ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes bobble {
+  0%, 100% { transform: translateY(0) scale(1);    opacity: 0.5; }
+  50%       { transform: translateY(-28px) scale(1.12); opacity: 0.35; }
+}
+
+/* ── Scroll-down indicator ── */
+.scroll-indicator {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  color: rgba(255, 255, 255, 0.82);
+  animation: bounceDown 1.8s ease-in-out infinite;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25));
+}
+
+@keyframes bounceDown {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(9px); }
 }
 
 /* ── Stripe ── */
@@ -426,6 +479,10 @@ h2 {
 
 /* ── Large phone — hamburger kicks in (≤ 640px) ── */
 @media (max-width: 640px) {
+  .hero-glass {
+    padding: 1.75rem 2rem;
+  }
+
   /* Show hamburger, hide inline links */
   .nav-toggle {
     display: flex;
@@ -477,6 +534,11 @@ h2 {
 
 /* ── Small phone (≤ 420px) ── */
 @media (max-width: 420px) {
+  .hero-glass {
+    padding: 1.4rem 1.4rem;
+    border-radius: 14px;
+  }
+
   .navbar-inner {
     padding: 10px 1rem;
   }
