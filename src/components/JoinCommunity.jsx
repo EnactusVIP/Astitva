@@ -3,14 +3,30 @@ import { useState } from 'react'
 export default function JoinCommunity({ onBack }) {
   const [form, setForm] = useState({ name: '', phone: '', city: '' })
   const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState('')
+  const [submitting, setSubmitting] = useState(false)
 
   const handleChange = e =>
     setForm(f => ({ ...f, [e.target.name]: e.target.value }))
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault()
-    setSubmitted(true)
-    setTimeout(onBack, 3500)
+    setSubmitting(true)
+    setError('')
+    try {
+      const res = await fetch('/api/join-community', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
+      if (!res.ok) throw new Error('Request failed')
+      setSubmitted(true)
+      setTimeout(onBack, 3500)
+    } catch {
+      setError('Something went wrong — please try again.')
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   if (submitted) {
@@ -81,7 +97,11 @@ export default function JoinCommunity({ onBack }) {
             />
           </label>
 
-          <button type="submit" className="submit-btn">Submit</button>
+          {error && <p className="modal-error">{error}</p>}
+
+          <button type="submit" className="submit-btn" disabled={submitting}>
+            {submitting ? 'Submitting…' : 'Submit'}
+          </button>
         </form>
       </div>
     </div>

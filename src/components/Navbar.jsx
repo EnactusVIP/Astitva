@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-export default function Navbar() {
+export default function Navbar({ onSupport }) {
   const [open, setOpen] = useState(false)
   const close = () => setOpen(false)
 
@@ -27,6 +27,13 @@ export default function Navbar() {
           <a href="#about"    onClick={close}>About Us</a>
           <a href="#read-more" onClick={close}>Read More</a>
           <a href="#contact"  onClick={close}>Contact Us</a>
+          <a
+            href="#support"
+            onClick={(e) => { e.preventDefault(); close(); onSupport && onSupport(); }}
+            className="nav-support-link"
+          >
+            Support Hub
+          </a>
         </nav>
       </div>
     </header>

@@ -1,4 +1,4 @@
-export default function Hero({ onJoin }) {
+export default function Hero({ onJoin, onSupport }) {
   return (
     <section className="hero" id="home">
       <div className="hero-overlay" />
@@ -12,6 +12,9 @@ export default function Hero({ onJoin }) {
         <div className="hero-buttons">
           <button className="join-btn" onClick={onJoin}>
             Join Community
+          </button>
+          <button className="join-btn support-btn" onClick={onSupport}>
+            Support &amp; Resources
           </button>
         </div>
       </div>

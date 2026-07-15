@@ -6,19 +6,35 @@ import ReadMore from './components/ReadMore'
 import Contact from './components/Contact'
 import Stripe from './components/Stripe'
 import JoinCommunity from './components/JoinCommunity'
+import SupportHub from './components/SupportHub'
+import SaathiChat from './components/SaathiChat'
 
 export default function App() {
   const [page, setPage] = useState('home')
 
   if (page === 'join') {
-    return <JoinCommunity onBack={() => setPage('home')} />
+    return (
+      <>
+        <JoinCommunity onBack={() => setPage('home')} />
+        <SaathiChat />
+      </>
+    )
+  }
+
+  if (page === 'support') {
+    return (
+      <>
+        <SupportHub onBack={() => setPage('home')} />
+        <SaathiChat />
+      </>
+    )
   }
 
   return (
     <>
-      <Navbar />
+      <Navbar onSupport={() => setPage('support')} />
       <main className="page">
-        <Hero onJoin={() => setPage('join')} />
+        <Hero onJoin={() => setPage('join')} onSupport={() => setPage('support')} />
         <Stripe />
         <About />
         <Stripe />
@@ -27,6 +43,7 @@ export default function App() {
         <Contact />
         <Stripe />
       </main>
+      <SaathiChat />
     </>
   )
 }
